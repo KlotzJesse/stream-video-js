@@ -1,38 +1,38 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
+import type { INoiseCancellation } from '@stream-io/audio-filters-web';
 import {
   BackgroundFiltersProvider,
   Call,
-  CallingState,
   CallRequest,
+  CallingState,
   NoiseCancellationProvider,
   StreamCall,
   StreamVideo,
   StreamVideoClient,
   User,
 } from '@stream-io/video-react-sdk';
-import type { INoiseCancellation } from '@stream-io/audio-filters-web';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { TranslationLanguages } from 'stream-chat';
-import { useCreateStreamChatClient } from '../../hooks';
 import { MeetingUI } from '../../components';
-import {
-  getServerSideCredentialsProps,
-  ServerSideCredentialsProps,
-} from '../../lib/getServerSideCredentialsProps';
-import { useGleap } from '../../hooks/useGleap';
-import { useSettings } from '../../context/SettingsContext';
 import {
   useAppEnvironment,
   useIsDemoEnvironment,
 } from '../../context/AppEnvironmentContext';
+import { useSettings } from '../../context/SettingsContext';
 import { TourProvider } from '../../context/TourContext';
-import appTranslations from '../../translations';
-import { customSentryLogger } from '../../helpers/logger';
 import {
   defaultRequestTransformers,
   defaultResponseTransformers,
 } from '../../helpers/axiosApiTransformers';
+import { customSentryLogger } from '../../helpers/logger';
+import { useCreateStreamChatClient } from '../../hooks';
+import { useGleap } from '../../hooks/useGleap';
+import {
+  ServerSideCredentialsProps,
+  getServerSideCredentialsProps,
+} from '../../lib/getServerSideCredentialsProps';
+import appTranslations from '../../translations';
 import type {
   CreateJwtTokenRequest,
   CreateJwtTokenResponse,
@@ -237,6 +237,7 @@ const CallRoom = (props: ServerSideCredentialsProps) => {
               basePath={`${basePath}/tf`}
               isBlurringEnabled={true}
               backgroundImages={[
+                `${basePath}/backgrounds/krauss-marketplace-bg.png`,
                 `${basePath}/backgrounds/amsterdam-1.jpg`,
                 `${basePath}/backgrounds/amsterdam-2.jpg`,
                 `${basePath}/backgrounds/boulder-1.jpg`,

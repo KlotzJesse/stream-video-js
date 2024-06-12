@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
 import { TranslationLanguage } from '@stream-io/video-react-sdk';
+import { useCallback, useEffect, useState } from 'react';
 
 const LANGUAGE_SETTINGS_KEY = '@pronto/lng-settings';
 
@@ -17,7 +17,7 @@ export const useLanguage = () => {
 
   return {
     language,
-    fallbackLanguage: 'en',
+    fallbackLanguage: 'de',
     setLanguage,
   };
 };

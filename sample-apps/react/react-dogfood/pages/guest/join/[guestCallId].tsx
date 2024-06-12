@@ -1,4 +1,4 @@
-import { GetServerSidePropsContext } from 'next';
+import type { INoiseCancellation } from '@stream-io/audio-filters-web';
 import {
   BackgroundFiltersProvider,
   Call,
@@ -10,19 +10,19 @@ import {
   User,
   UserResponse,
 } from '@stream-io/video-react-sdk';
-import type { INoiseCancellation } from '@stream-io/audio-filters-web';
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useEffect, useRef, useState } from 'react';
 import { MeetingUI } from '../../../components';
 import { type UserMode } from '../../../components/Lobby';
-import { createToken } from '../../../helpers/jwt';
-import { useEffect, useRef, useState } from 'react';
-import { useGleap } from '../../../hooks/useGleap';
-import { customSentryLogger } from '../../../helpers/logger';
 import {
   defaultRequestTransformers,
   defaultResponseTransformers,
 } from '../../../helpers/axiosApiTransformers';
+import { createToken } from '../../../helpers/jwt';
+import { customSentryLogger } from '../../../helpers/logger';
+import { useGleap } from '../../../hooks/useGleap';
 
 type GuestCallRoomProps = {
   user: UserResponse;
@@ -129,6 +129,7 @@ export default function GuestCallRoom(props: GuestCallRoomProps) {
             basePath={`${basePath}/tf`}
             isBlurringEnabled={true}
             backgroundImages={[
+              `${basePath}/backgrounds/krauss-marketplace-bg.png`,
               `${basePath}/backgrounds/amsterdam-1.jpg`,
               `${basePath}/backgrounds/amsterdam-2.jpg`,
               `${basePath}/backgrounds/boulder-1.jpg`,

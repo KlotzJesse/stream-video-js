@@ -1,11 +1,11 @@
 import type { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth';
-import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google';
 import {
   CredentialInput,
   CredentialsConfig,
   Provider,
 } from 'next-auth/providers';
+import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google';
 import names from 'starwars-names';
 
 type StreamDemoAccountCredentials = {
@@ -41,8 +41,8 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    !isProntoEnvironment && StreamDemoAccountProvider,
-    isProntoEnvironment &&
+    StreamDemoAccountProvider,
+    !isProntoEnvironment &&
       GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID!,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
@@ -57,10 +57,7 @@ export const authOptions: NextAuthOptions = {
         const isStreamEmployee = email.endsWith('@getstream.io');
         return email_verified && isStreamEmployee;
       }
-      return (
-        !isProntoEnvironment &&
-        account?.provider === StreamDemoAccountProvider.id
-      );
+      return account?.provider === StreamDemoAccountProvider.id;
     },
     async redirect({ baseUrl, url }) {
       // when running the demo on Vercel, we need to patch the baseUrl
